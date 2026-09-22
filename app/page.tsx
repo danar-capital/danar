@@ -2051,12 +2051,18 @@ export default function InterviewScheduler() {
     "?text=" + encodeURIComponent(
       "CONFIRMED — Meeting ID: " + row.meetingId + " — Candidate: " + row.name,
     );
+  const RECRUITMENT_SIGNATURE = "HRadeeco Recruitment Team";
   const emailMessageFor = (row: ScheduleRow, kind: MessageKind) => {
-    const message = messageFor(row, kind);
-    if (kind !== "invitation") return message;
+    // Keep the company signature below every generated detail, including the
+    // Meeting ID and WhatsApp confirmation link in the invitation email.
+    const message = messageFor(row, kind)
+      .replace(/\s*HRadeeco Recruitment Team\s*$/, "")
+      .trimEnd();
+    if (kind !== "invitation") return message + "\n\n" + RECRUITMENT_SIGNATURE;
     return message +
       "\n\nMeeting ID: " + row.meetingId +
-      "\n\nConfirm your attendance on WhatsApp:\n" + attendanceConfirmationUrl(row);
+      "\n\nConfirm your attendance on WhatsApp:\n" + attendanceConfirmationUrl(row) +
+      "\n\n" + RECRUITMENT_SIGNATURE;
   };
   const emailSubjectFor = (row: ScheduleRow, kind: MessageKind) => {
     const label = kind === "invitation"
