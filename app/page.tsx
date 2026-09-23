@@ -225,7 +225,7 @@ const WORK_PREFERENCE_OPTIONS: WorkPreference[] = [
 ];
 
 const MEETING_ID_START = 300;
-const CONFIRMATION_WHATSAPP_NUMBER = "17095063202";
+const CONFIRMATION_WHATSAPP_NUMBER = "13433034488";
 
 function isRecordValue(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
